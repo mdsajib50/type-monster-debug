@@ -149,7 +149,7 @@ button {
 }
 
 .card {
-  width: 100%;
+  width: 32%;
   height: 100%;
   padding: 50px;
   display: flex;
@@ -158,7 +158,7 @@ button {
   padding: 20px 30px;
   color: white;
   border-radius: 15px;
-  background: rgb(255, 255, 255);
+  background-color: rgb(31, 9, 12) !important;
   background: linear-gradient(
     92.49deg,
     rgba(255, 255, 255, 0.1) 0.18%,
@@ -189,5 +189,6 @@ button {
   }
   .card {
     flex-direction: column;
+    width: 98%;
   }
 }
