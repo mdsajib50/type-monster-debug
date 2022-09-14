@@ -39,13 +39,15 @@ const typeController = (e) => {
   }
 
   userText += newLetter;
+  console.log(validate(newLetter));
 
-  const newLetterCorrect = validate(newLetter);
+  const newLetterCorrect =validate(newLetter) ;
 
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
+    errorCount++;
   }
 
   // check if given question text is equal to user typed text
@@ -56,8 +58,10 @@ const typeController = (e) => {
 
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
+   
     return true;
   }
+  console.log(key)
   return false;
 };
 
@@ -116,8 +120,9 @@ const start = () => {
       countdownOverlay.style.display = "none";
       display.classList.remove("inactive");
       clearInterval(startCountdown);
-      startTime = new Date().getSeconds();
+      startTime = new Date().getUTCSeconds();
       // Math.round(startTime)
+      // startTime = Math.floor((1000 * 60) / 1000);
       console.log(startTime)
     }
     count--;
@@ -133,9 +138,9 @@ displayHistory();
 
 // Show typing time spent
 setInterval(() => {
-  const currentTime = new Date().getSeconds();
-  const timeSpent = (currentTime - startTime);
+  const currentTime = new Date().getUTCSeconds();
+  const timeSpent = (currentTime - startTime) ;
 
 
-  document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
+  document.getElementById("show-time").innerHTML = `${timeSpent ? timeSpent : 0} seconds`;
 }, 1000);
