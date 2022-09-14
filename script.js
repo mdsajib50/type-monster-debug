@@ -70,8 +70,8 @@ const gameOver = () => {
   document.removeEventListener("keydown", typeController);
   // the current time is the finish time
   // so total time taken is current time - start time
-  const finishTime = new Date().getSeconds();
-  const timeTaken = (finishTime - startTime) / 1000;
+      const finishTime = new Date().getUTCSeconds();
+  const timeTaken = (finishTime - startTime);
 
   // show result modal
   resultModal.innerHTML = "";
@@ -121,9 +121,7 @@ const start = () => {
       display.classList.remove("inactive");
       clearInterval(startCountdown);
       startTime = new Date().getUTCSeconds();
-      // Math.round(startTime)
-      // startTime = Math.floor((1000 * 60) / 1000);
-      console.log(startTime)
+     
     }
     count--;
    
@@ -142,5 +140,5 @@ setInterval(() => {
   const timeSpent = (currentTime - startTime) ;
 
 
-  document.getElementById("show-time").innerHTML = `${timeSpent ? timeSpent : 0} seconds`;
+  document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
 }, 1000);
