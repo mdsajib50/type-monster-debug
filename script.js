@@ -23,7 +23,6 @@ fetch("./texts.json")
 const typeController = (e) => {
   const newLetter = e.key;
   
-
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
@@ -40,7 +39,6 @@ const typeController = (e) => {
   }
 
   userText += newLetter;
-  console.log(validate(newLetter));
 
   const newLetterCorrect =validate(newLetter) ;
 
@@ -55,12 +53,11 @@ const typeController = (e) => {
   if (questionText === userText) {
     gameOver();
   }
-  // e.key==''? e.preventDefault():;
+
 };
 
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
-   
     return true;
   }
   else{return false;}
@@ -73,7 +70,6 @@ const gameOver = () => {
   // so total time taken is current time - start time
   const finishTime = new Date().getSeconds() /1000;
   const timeTaken = (finishTime - startTime);
-  console.log(Math.round(timeTaken));
 
   // show result modal
   resultModal.innerHTML = "";
@@ -116,19 +112,19 @@ const start = () => {
     countdownOverlay.innerHTML = `<h1>${count}</h1>`;
 
     // finished timer
-    if (count < 0) {
+    if (count == 0) {
       // -------------- START TYPING -----------------
       document.addEventListener("keydown", typeController);
       countdownOverlay.style.display = "none";
       display.classList.remove("inactive");
       clearInterval(startCountdown);
-      startTime = new Date().getSeconds() /1000;
-      console.log(Math.round(startTime))
+      startTime = new Date().getSeconds();
      
     }
     count--;
    
   }, 1000);
+ 
 };
 
 // START Countdown
@@ -140,9 +136,9 @@ displayHistory();
 // Show typing time spent
 setInterval(() => {
   const currentTime = new Date().getSeconds();
-  const timeSpent = (currentTime - startTime) / 1000 ;
-  const timeRound = Math.floor(timeSpent);
-  console.log(timeRound);
+  const timeSpent =(currentTime - startTime) ;
+  
+  const timeParse = parseInt(timeSpent);
 
-  document.getElementById("show-time").innerHTML = `${startTime ? timeRound : 0} seconds`;
-},1000);
+  document.getElementById("show-time").innerHTML = `${startTime ? timeParse: 0} seconds`;
+}, 1000);
